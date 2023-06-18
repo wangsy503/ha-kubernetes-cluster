@@ -12,12 +12,12 @@ ansible-galaxy collection install community.crypto
 ## 2 Do the cluster nodes (VMs) creation
 
 Clone my modified cluster generation repository.
-```
+```bash
 git clone https://github.com/wangsy503/ha-kubernetes-cluster.git
 ```
 
 Run the cluster creation playbook. You can change the settings inside [`/ha-kubernetes-cluster/host_vars/localhost/defaults.yml`](https://github.com/wangsy503/ha-kubernetes-cluster/blob/master/host_vars/localhost/defaults.yml) before creating the VMs.
-```
+```bash
 cd ha-kubernetes-cluster/ 
 sudo ansible-playbook cluster-provisioner.yml -e cluster_name=development
 ```
@@ -41,7 +41,7 @@ virsh list
 
 Then we can create the K8s cluster. We are going to use **kubespray**, which will call **kubeadm** inside to create the cluster.
 
-```
+```bash
 cd development/kubespray 
 sudo ansible-playbook -i inventory/development/hosts.yaml --become --become-user=root cluster.yml -u wrds --private-key ../id_ssh_rsa
 ```
@@ -49,17 +49,17 @@ sudo ansible-playbook -i inventory/development/hosts.yaml --become --become-user
 ## 4 Validate the changes
 
 Look up the ip address of one of the controller nodes.
-```
+```bash
 virsh domifaddr development-kube-controller-1
 ```
 
 Get the ip address, and enter the node using ssh.
-```
+```bash
 sudo ssh wrds@{controller-ip-addrss} -i ../id_ssh_rs
 ```
 
 Now you are inside the controller node, check the status of the kubenetes cluster.
-```
+```bash
 sudo kubectl cluster-info --kubeconfig /etc/kubernetes/admin.conf
 ```
 
@@ -68,9 +68,25 @@ You should see
 
 
 If you run 
-```
+```bash
 sudo kubectl get node --kubeconfig /etc/kubernetes/admin.conf
 ```
 
 You should see
 <img width="1022" alt="Screen Shot 2023-06-18 at 19 38 29" src="https://github.com/wangsy503/ha-kubernetes-cluster/assets/46682066/d9c59708-02bf-4d9c-8986-307b7cd107ec">
+
+## 5 More playbooks are present to stop, start and delete the cluster.
+```bash
+#delete the cluster, but save the VM disk
+
+ansible-playbook cluster-delete.yml  -e cluster_to_delete=development
+
+#delete the VM in the cluster and their disks
+ansible-playbook cluster-delete.yml  -e cluster_to_delete=development  -e delete_disk=true
+
+#shutdown all the VM in the cluster
+ansible-playbook cluster-stop.yml  -e cluster_to_stop=development
+
+#start all the VM in the cluster
+ansible-playbook cluster-start.yml  -e cluster_to_start=development
+```

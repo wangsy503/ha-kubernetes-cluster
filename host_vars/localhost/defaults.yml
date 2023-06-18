@@ -21,7 +21,7 @@ master_prefix: "kube-controller"
 master_memory: "2048"
 master_vcpu: 2
 master_disk: 80G
-master_os_variant: ubuntu22.04
+master_os_variant: ubuntu20.04
 #If you need fedora images, get them from https://download.fedoraproject.org/pub/fedora/linux/releases/
 # make sure you use cloud image that supports cloud-init.
 
@@ -46,7 +46,7 @@ worker_prefix: "kube-worker"
 worker_memory: "2048"
 worker_vcpu: 2
 worker_disk: 120G
-worker_os_variant: ubuntu22.04
+worker_os_variant: ubuntu20.04
 worker_image_source: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 worker_install_tools:
 - qemu-guest-agent # Remove this if you wish not to control the guest VM from host machine
@@ -66,7 +66,7 @@ loadbalancer_prefix: "kube-loadbalancer"
 loadbalancer_memory: "512"
 loadbalancer_vcpu: 1
 loadbalancer_disk: 40G
-loadbalancer_os_variant: ubuntu22.04
+loadbalancer_os_variant: ubuntu20.04
 loadbalancer_image_source: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
 loadbalancer_install_tools:
 - haproxy
@@ -158,8 +158,8 @@ wait_for_ip_assignment: True
 
 #following values will only be used if user did not supply the cloud init file as input
 # this is going to be one time initial password
-default_username: "technekey"
-default_password: "technekey"
+default_username: "wrds"
+default_password: "wrds"
 
 
 #default timezone

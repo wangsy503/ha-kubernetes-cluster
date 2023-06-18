@@ -9,7 +9,7 @@
     - python3-libvirt
     - libvirt-clients
     - virtinst
-    - guestfs-tools
+    - libguestfs-tools
     - qemu-utils
     - qemu-kvm
     - cloud-image-utils

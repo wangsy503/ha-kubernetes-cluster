@@ -1,4 +1,6 @@
-Here we created an HA mode K8s cluster with 2 load balancers, 2 controllers and 2 workers. You can change the settings in [`/ha-kubernetes-cluster/host_vars/localhost/defaults.yml`](https://github.com/wangsy503/ha-kubernetes-cluster/blob/master/host_vars/localhost/defaults.yml).
+Here we created an HA mode K8s cluster with 2 load balancers, 2 controllers and 2 workers. You can change the settings in [`/ha-kubernetes-cluster/host_vars/localhost/defaults.yml`](https://github.com/wangsy503/ha-kubernetes-cluster/blob/master/host_vars/localhost/defaults.yml). 
+
+This repository is modified based on [technekey's post](https://technekey.com/automated-kubernetes-cluster-creation-using-libvert-and-kubespray/). Read original post for more information.
 
 ## 1 Install requirements in host machine
 
@@ -39,7 +41,14 @@ virsh list
 
 ## 3 Use kubespray to create the cluster
 
-Then we can create the K8s cluster. We are going to use **kubespray**, which will call **kubeadm** inside to create the cluster.
+Then we can create the K8s cluster. We are going to use [**kubespray**](https://kubespray.io/) (we will clone kubespray repository inside `/development` folder during VM creation), which will call **kubeadm** inside to create the cluster.
+
+More cluster settings can be viewed and modified inside 
+- `/ha-kubernetes-cluster/development/kubespray/inventory/development/hosts.yaml`
+- `/ha-kubernetes-cluster/development/kubespray/inventory/development/group_vars/k8s_cluster/k8s-cluster.yml`
+- `/ha-kubernetes-cluster/development/kubespray/inventory/development/group_vars/all/all.yml`.
+
+
 
 ```bash
 cd development/kubespray 

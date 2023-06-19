@@ -1,4 +1,4 @@
-Here we created an HA mode K8s cluster with 2 load balancers, 2 controllers and 2 workers. You can change the settings in [`/ha-kubernetes-cluster/host_vars/localhost/defaults.yml`](https://github.com/wangsy503/ha-kubernetes-cluster/blob/master/host_vars/localhost/defaults.yml). 
+Here we created an HA mode K8s cluster with 2 load balancers, 2 controllers and 2 workers. You can change the settings in [`/ha-kubernetes-cluster/host_vars/localhost/defaults.yml`](https://github.com/wangsy503/ha-kubernetes-cluster/blob/master/host_vars/localhost/defaults.yml). The code has been validated under Ubuntu 20.04.6 LTS.
 
 This repository is modified based on [technekey's post](https://technekey.com/automated-kubernetes-cluster-creation-using-libvert-and-kubespray/). Read original post for more information.
 
@@ -33,9 +33,8 @@ virsh list
  16   development-kube-controller-2     running
  17   development-kube-worker-1         running
  18   development-kube-worker-2         running
- 19   development-kube-worker-3         running
- 20   development-kube-loadbalancer-1   running
- 21   development-kube-loadbalancer-2   running
+ 19   development-kube-loadbalancer-1   running
+ 20   development-kube-loadbalancer-2   running
 ```
 
 
